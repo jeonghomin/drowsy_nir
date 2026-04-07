@@ -1,0 +1,41 @@
+# YOLOv8-Pose 기반 Geometry-only DMS 파이프라인 (4D: EAR, Yaw, Pitch, R_sym)
+# 15-keypoint(눈 6+6 + 코 + 입) 좌표 + solvePnP. Soukupova 6pt EAR.
+
+pose_model: weights/best.pt
+
+geometry:
+  stats: core/geometry_stats_4d.npz
+  # Condition: Reject=탐지불가 | Flag=M-Dist 신뢰밖(구 OOD→Reject) | Accept=행동분류 허용
+  # soft_band: M<=ood_soft → Accept, M>ood_soft → Flag (soft<M<=hard: 칼만 R×2, M>hard: predict-only)
+  # single_tau: M<=ood_threshold → Accept, M>ood_threshold → Flag (실험 비교용)
+  ood_flag_mode: soft_band
+  ood_threshold: 6.0         # soft_band: Flag 구간 상한(칼만 약한 업데이트 vs predict-only)
+  ood_soft_threshold: 4.0    # soft_band: Accept 구간 상한 (15pt 4D 95th ≈ 3.11 근처)
+  min_keypoint_conf: 0.5     # 키포인트 confidence < 이 값이면 즉시 Reject
+
+  # 상태 판별 threshold
+  # 졸음 예민도: 1=덜 예민, 2=기본, 3=더 예민 (설정 시 아래 ear/duration 수동값 무시)
+  #   1 → ratio 0.48, 3.0s | 2 → 0.55, 2.0s | 3 → 0.65, 1.5s
+
+  drowsy_sensitivity: 3
+  
+  ear_drowsy_ratio: 0.55       # drowsy_sensitivity 생략 시만 사용
+  yaw_distracted_deg: 30.0     # |Yaw| > 이 각도면 고개 돌림 (degrees)
+
+  # 시간 기반 판별 (Drowsy는 EAR만 사용; Pitch는 Mahalanobis/칼만 특성으로만 사용)
+  drowsy_duration_sec: 3       # drowsy_sensitivity 생략 시만 사용
+  distracted_duration_sec: 1 # Yaw 이탈이 이 시간 지속 시 Distracted
+  # EAR >= 임계(눈 뜸)일 때 즉시 타이머 리셋 대신, 이 시간(초) 연속 뜸이면 리셋. 0 또는 생략 = 기존 즉시 리셋
+  drowsy_ear_open_grace_sec: 0.5
+
+  # 칼만: Q=process_noise, R=measurement_noise. Q↑·R↓ → 추적 빨라지나 Drowsy는 연속시간 조건이라
+  # 과도 튜닝 시 EAR 요동으로 타이머 리셋 → PERCLOS 정합(G=0) 악화 가능(7-3에서 검증).
+  # 기본값: Q=1e-3, R=0.08 | 중간: geometry_dms_kalman_mid.yaml | 공격: geometry_dms_kalman_fast.yaml
+  kalman:
+    process_noise: 1.0e-3
+    measurement_noise: 0.08
+
+  # 캘리브레이션
+  calibration_frames: 30
+
+device: cuda:0

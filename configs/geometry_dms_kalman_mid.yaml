@@ -1,0 +1,28 @@
+# geometry_dms.yaml 과 동일, Kalman 중간 튜닝 (Q=2e-3, R=0.06).
+# 7-3·1800f·PERCLOS>15% grace: G=0 recall 기본 0.52 → 중간 0.48 | G=3·10은 기본과 동일(0.64·0.93).
+# 비교: --config configs/geometry_dms_kalman_mid.yaml
+
+pose_model: weights/best.pt
+
+geometry:
+  stats: core/geometry_stats_4d.npz
+  ood_flag_mode: soft_band
+  ood_threshold: 6.0
+  ood_soft_threshold: 4.0
+  min_keypoint_conf: 0.5
+
+  drowsy_sensitivity: 3
+
+  ear_drowsy_ratio: 0.55
+  yaw_distracted_deg: 30.0
+
+  drowsy_duration_sec: 3
+  distracted_duration_sec: 1
+
+  kalman:
+    process_noise: 2.0e-3
+    measurement_noise: 0.06
+
+  calibration_frames: 30
+
+device: cuda:0

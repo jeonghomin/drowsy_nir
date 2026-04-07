@@ -1,0 +1,29 @@
+# geometry_dms.yaml 과 동일, Kalman 만 공격 튜닝 (Q↑ R↓).
+# 7-3·1800f·PERCLOS>15% grace 실험: G=0 recall 기본 0.52 → 본 설정 0.41 (악화).
+# 원인 후보: 필터 EAR 요동 → drowsy 연속시간 타이머 리셋.
+# 비교: --config configs/geometry_dms_kalman_fast.yaml
+
+pose_model: weights/best.pt
+
+geometry:
+  stats: core/geometry_stats_4d.npz
+  ood_flag_mode: soft_band
+  ood_threshold: 6.0
+  ood_soft_threshold: 4.0
+  min_keypoint_conf: 0.5
+
+  drowsy_sensitivity: 3
+
+  ear_drowsy_ratio: 0.55
+  yaw_distracted_deg: 30.0
+
+  drowsy_duration_sec: 3
+  distracted_duration_sec: 1
+
+  kalman:
+    process_noise: 5.0e-3
+    measurement_noise: 0.04
+
+  calibration_frames: 30
+
+device: cuda:0

@@ -1,0 +1,37 @@
+# ═══════════════════════════════════════════════
+#  YOLOv8-Pose Fine-tuning Config
+# ═══════════════════════════════════════════════
+#
+#  Usage:
+#    python train_pose.py --config configs/train_pose.yaml
+#
+
+# ── 모델 ──
+model: weights/yolov8n-pose.pt
+
+# ── 데이터 ──
+# 15-keypoint: 눈당 6점(dlib 원본) + 코 + 입꼬리 2. 시각화는 utils/face_pose15_viz.py
+# AI-Hub 데이터셋 경로 (사용자 환경에 맞게 수정)
+data: datasets/ai-hubv2/yolo_pose/face_pose.yaml
+fraction: 0.3     # train split의 30%만 사용 (~12k / 41,052)
+
+# ── 학습 설정 ──
+epochs: 10
+imgsz: 640
+batch: 64              # 단일 GPU
+device: "0"             # NCCL/DDP 호환 문제로 단일 GPU 사용
+workers: 8
+
+# ── 학습률 ──
+lr0: 0.01
+lrf: 0.01
+warmup_epochs: 3
+
+# ── Augmentation ──
+close_mosaic: 10
+
+# ── 저장 ──
+project: runs/pose
+name: face15kp_v1
+exist_ok: true
+pretrained: true

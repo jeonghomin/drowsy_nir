@@ -1,0 +1,30 @@
+__pycache__/
+*.pyc
+*.pyo
+
+# 실험 결과 (영상, trace, 이미지)
+runs/
+
+# MediaPipe 보조 실험
+media-pipe/
+
+# 루트 중복 가중치
+/yolo26n.pt
+/face_landmarker.task
+
+# 구버전 stats
+core/geometry_stats.npz
+
+# 구버전 시각화
+utils/face_pose5_viz.py
+utils/face_pose11_viz.py
+
+# 논문 자료
+paper/
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
