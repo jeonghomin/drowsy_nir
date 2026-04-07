@@ -74,15 +74,11 @@ python train_pose.py --config configs/train_pose.yaml
 ```
 exp3/
 ├── README.md
-├── EXPERIMENT.md              # 실험 설계 및 결과 상세
 ├── train_pose.py              # YOLOv8-Pose 학습 스크립트
 │
 ├── configs/
-│   ├── geometry_dms.yaml              # DMS 파이프라인 설정 (soft_band, grace 등)
-│   ├── geometry_dms_ear_grace_off.yaml  # grace=0 비교용
-│   ├── geometry_dms_kalman_mid.yaml   # Kalman Q/R 중간 튜닝
-│   ├── geometry_dms_kalman_fast.yaml  # Kalman Q/R 공격 튜닝
-│   └── train_pose.yaml               # Pose 모델 학습 설정
+│   ├── geometry_dms.yaml      # DMS 파이프라인 설정 (soft_band, grace 등)
+│   └── train_pose.yaml        # Pose 모델 학습 설정
 │
 ├── core/
 │   ├── dms_geometry.py        # DMSGeometryAnalyzer (Condition + Flag + Grace)
