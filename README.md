@@ -1,5 +1,5 @@
 # DMS Pipeline
-system_diagram.png
+
 
 
 ## 데이터셋
@@ -56,7 +56,7 @@ python train_pose.py --config configs/train_pose.yaml
 ```
 
 ## 파이프라인 개요
-
+![System Diagram](system_diagram.png)
 
 ## 졸음 예민도 프리셋 (`drowsy_sensitivity`)
 
