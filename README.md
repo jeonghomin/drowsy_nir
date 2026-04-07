@@ -56,7 +56,7 @@ python train_pose.py --config configs/train_pose.yaml
 ```
 
 ## 파이프라인 개요
-![System Diagram](system_diagram.png)
+파이프라인 전체 구조도: `system_diagram.png` (repo 루트)
 
 ## 졸음 예민도 프리셋 (`drowsy_sensitivity`)
 
