@@ -1,8 +1,6 @@
-# EfficientNet-Free DMS Pipeline — exp3
+# DMS Pipeline — exp3
 
-YOLOv8-Pose 15-keypoint의 **기하학적 분석만으로** 운전자 상태를 판별하는 경량 파이프라인.
-EfficientNet 분류 모델을 완전히 제거하고, 좌표의 상관관계만 사용하여 이미지 도메인 변화에 강건하게 설계됨.
-**Condition 게이트 (Flag)**, **drowsy_sensitivity 프리셋**, **EAR open grace**, **PERCLOS 정합 검증** 포함.
+
 
 ## 데이터셋
 
