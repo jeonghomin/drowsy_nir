@@ -3,7 +3,7 @@
 ## 파이프라인 개요
 
 > [!NOTE]
-> **파이프라인 전체 구조도:** 저장소 루트의 [`system_diagram.png`](../system_diagram.png) (클릭 시 이미지 보기)
+> **파이프라인 전체 구조도:** 저장소 루트의 [`system_diagram.png`](./system_diagram.png) (클릭 시 이미지 보기)
 
 
 
