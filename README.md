@@ -1,5 +1,12 @@
 # exp3 — Geometry DMS
 
+## 파이프라인 개요
+
+> [!NOTE]
+> **파이프라인 전체 구조도:** 저장소 루트의 [`system_diagram.png`](../system_diagram.png) (클릭 시 이미지 보기)
+
+
+
 ## 데이터셋
 
 ### 학습 데이터: AI-Hub 졸음운전 예방을 위한 운전자 상태 정보 영상
@@ -81,10 +88,6 @@ python -m core.inference_geometry \
 python train_pose.py --config configs/train_pose.yaml
 ```
 
-## 파이프라인 개요
-
-> [!NOTE]
-> **파이프라인 전체 구조도:** 저장소 루트의 [`system_diagram.png`](../system_diagram.png) (클릭 시 이미지 보기)
 
 ## 졸음 예민도 프리셋 (`drowsy_sensitivity`)
 
