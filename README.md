@@ -1,6 +1,4 @@
-# DMS Pipeline
-
-
+# exp3 — Geometry DMS
 
 ## 데이터셋
 
@@ -15,6 +13,34 @@
 
 - **출처**: [ORBi — ULiège](https://orbi.uliege.be/handle/2268/191620)
 - **논문**: Massoz et al., "The ULg Multimodality Drowsiness Database (called DROZY) and examples of use", IEEE WACV 2016
+
+## Failure case samples
+
+GIF는 README 미리보기용(해상도·fps 축소). 원본 영상은 [`sample_video/`](sample_video/)의 MP4를 Git에 같이 두면 된다.
+
+**Failure case 1.** Eye-to-cheek OOD (3-1, 약 8–17 s)
+
+| Baseline | Proposed |
+|:--:|:--:|
+| ![Failure case 1 baseline](sample_video/cheek_3-1_baseline_8to17s.gif) | ![Failure case 1 proposed](sample_video/cheek_3-1_proposed_8to17s.gif) |
+
+[MP4 baseline](sample_video/cheek_3-1_baseline_8to17s.mp4) · [MP4 proposed](sample_video/cheek_3-1_proposed_8to17s.mp4)
+
+**Failure case 2.** Eye-stretch OOD (7-3, 약 8–17 s)
+
+| Baseline | Proposed |
+|:--:|:--:|
+| ![Failure case 2 baseline](sample_video/stretch_7-3_baseline_8to17s.gif) | ![Failure case 2 proposed](sample_video/stretch_7-3_proposed_8to17s.gif) |
+
+[MP4 baseline](sample_video/stretch_7-3_baseline_8to17s.mp4) · [MP4 proposed](sample_video/stretch_7-3_proposed_8to17s.mp4)
+
+**Failure case 3.** Pixel noise σ=20 (7-3, 1:02부터 8 s)
+
+| Baseline | Proposed |
+|:--:|:--:|
+| ![Failure case 3 baseline](sample_video/noise_s20_baseline_1m02_8s.gif) | ![Failure case 3 proposed](sample_video/noise_s20_proposed_1m02_8s.gif) |
+
+[MP4 baseline](sample_video/noise_s20_baseline_1m02_8s.mp4) · [MP4 proposed](sample_video/noise_s20_proposed_1m02_8s.mp4)
 
 ## Setup
 
@@ -56,6 +82,7 @@ python train_pose.py --config configs/train_pose.yaml
 ```
 
 ## 파이프라인 개요
+
 파이프라인 전체 구조도: `system_diagram.png` (repo 루트)
 
 ## 졸음 예민도 프리셋 (`drowsy_sensitivity`)
